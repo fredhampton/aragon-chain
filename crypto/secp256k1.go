@@ -4,10 +4,13 @@ import (
 	"bytes"
 	"crypto/ecdsa"
 
+	clientkeys "github.com/cosmos/cosmos-sdk/client/keys"
+	cryptokeys "github.com/cosmos/cosmos-sdk/crypto/keys"
+	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
+
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
 	ethsecp256k1 "github.com/ethereum/go-ethereum/crypto/secp256k1"
-
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
 	tmcrypto "github.com/tendermint/tendermint/crypto"
 	tmamino "github.com/tendermint/tendermint/crypto/encoding/amino"
@@ -18,6 +21,12 @@ func init() {
 	tmamino.RegisterKeyType(PrivKeySecp256k1{}, PrivKeyAminoName)
 	authtypes.RegisterAccountTypeCodec(PubKeySecp256k1{}, PubKeyAminoName)
 	authtypes.RegisterAccountTypeCodec(PrivKeySecp256k1{}, PrivKeyAminoName)
+	clientkeys.RegisterKeyTypeCodec(PubKeySecp256k1{}, PubKeyAminoName)
+	clientkeys.RegisterKeyTypeCodec(PrivKeySecp256k1{}, PrivKeyAminoName)
+	cryptokeys.RegisterKeyTypeCodec(PubKeySecp256k1{}, PubKeyAminoName)
+	cryptokeys.RegisterKeyTypeCodec(PrivKeySecp256k1{}, PrivKeyAminoName)
+	genutiltypes.RegisterKeyTypeCodec(PubKeySecp256k1{}, PubKeyAminoName)
+	genutiltypes.RegisterKeyTypeCodec(PrivKeySecp256k1{}, PrivKeyAminoName)
 }
 
 // ----------------------------------------------------------------------------

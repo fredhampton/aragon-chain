@@ -10,9 +10,7 @@ import (
 	"github.com/tendermint/go-amino"
 
 	"github.com/cosmos/cosmos-sdk/client"
-	clientkeys "github.com/cosmos/cosmos-sdk/client/keys"
 	sdkrpc "github.com/cosmos/cosmos-sdk/client/rpc"
-	cryptokeys "github.com/cosmos/cosmos-sdk/crypto/keys"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	authcmd "github.com/cosmos/cosmos-sdk/x/auth/client/cli"
@@ -27,9 +25,6 @@ func main() {
 	cobra.EnableCommandSorting = false
 
 	cdc := emintapp.MakeCodec()
-
-	cryptokeys.CryptoCdc = cdc
-	clientkeys.KeysCdc = cdc
 
 	// Read in the configuration file for the sdk
 	config := sdk.GetConfig()
