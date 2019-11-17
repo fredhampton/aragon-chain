@@ -1,6 +1,7 @@
 package app
 
 import (
+	"encoding/base32"
 	"os"
 	"testing"
 
@@ -34,4 +35,9 @@ func TestEthermintAppExport(t *testing.T) {
 	app2 := NewEthermintApp(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, true, 0)
 	_, _, err = app2.ExportAppStateAndValidators(false, []string{})
 	require.NoError(t, err, "ExportAppStateAndValidators should not have an error")
+
+}
+func TestThis(t *testing.T) {
+	testv := base32.NewEncoding("abcdefghijklmnopqrstuvwxyz234567")
+	require.Equal(t, testv.WithPadding(-1).EncodeToString([]byte{0x00, 0x01, 0x2, 0x0}), []byte("0"))
 }

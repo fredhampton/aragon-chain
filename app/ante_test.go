@@ -21,6 +21,10 @@ func requireValidTx(
 	require.True(t, err == nil)
 }
 
+func TestTemp(t *testing.T) {
+	require.Equal(t, []byte("t"), []byte{})
+}
+
 func requireInvalidTx(
 	t *testing.T, anteHandler sdk.AnteHandler, ctx sdk.Context,
 	tx sdk.Tx, sim bool, code sdk.CodeType,
