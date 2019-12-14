@@ -17,8 +17,8 @@ COMMIT_HASH := $(shell git rev-parse --short HEAD)
 BUILD_FLAGS = -tags netgo -ldflags "-X github.com/cosmos/ethermint/version.GitCommit=${COMMIT_HASH}"
 DOCKER_TAG = unstable
 DOCKER_IMAGE = cosmos/ethermint
-ETHERMINT_DAEMON_BINARY = emintd
-ETHERMINT_CLI_BINARY = emintcli
+ETHERMINT_DAEMON_BINARY = arad
+ETHERMINT_CLI_BINARY = aracli
 GO_MOD=GO111MODULE=on
 
 all: tools verify install
@@ -29,16 +29,16 @@ all: tools verify install
 
 build:
 ifeq ($(OS),Windows_NT)
-	${GO_MOD} go build $(BUILD_FLAGS) -o build/$(ETHERMINT_DAEMON_BINARY).exe ./cmd/emintd
-	${GO_MOD} go build $(BUILD_FLAGS) -o build/$(ETHERMINT_CLI_BINARY).exe ./cmd/emintcli
+	${GO_MOD} go build $(BUILD_FLAGS) -o build/$(ETHERMINT_DAEMON_BINARY).exe ./cmd/arad
+	${GO_MOD} go build $(BUILD_FLAGS) -o build/$(ETHERMINT_CLI_BINARY).exe ./cmd/aracli
 else
-	${GO_MOD} go build $(BUILD_FLAGS) -o build/$(ETHERMINT_DAEMON_BINARY) ./cmd/emintd/
-	${GO_MOD} go build $(BUILD_FLAGS) -o build/$(ETHERMINT_CLI_BINARY) ./cmd/emintcli/
+	${GO_MOD} go build $(BUILD_FLAGS) -o build/$(ETHERMINT_DAEMON_BINARY) ./cmd/arad/
+	${GO_MOD} go build $(BUILD_FLAGS) -o build/$(ETHERMINT_CLI_BINARY) ./cmd/aracli/
 endif
 
 install:
-	${GO_MOD} go install $(BUILD_FLAGS) ./cmd/emintd
-	${GO_MOD} go install $(BUILD_FLAGS) ./cmd/emintcli
+	${GO_MOD} go install $(BUILD_FLAGS) ./cmd/arad
+	${GO_MOD} go install $(BUILD_FLAGS) ./cmd/aracli
 
 clean:
 	@rm -rf ./build ./vendor

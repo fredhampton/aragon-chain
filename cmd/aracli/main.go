@@ -44,8 +44,8 @@ func main() {
 	config.Seal()
 
 	rootCmd := &cobra.Command{
-		Use:   "emintcli",
-		Short: "Ethermint Client",
+		Use:   "aracli",
+		Short: "Aragon Chain Client",
 	}
 
 	// Add --chain-id to persistent flags and mark it required

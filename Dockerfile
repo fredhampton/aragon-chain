@@ -4,7 +4,7 @@ FROM golang:alpine AS build-env
 ENV PACKAGES make git curl build-base
 
 # Set working directory for the build
-WORKDIR /go/src/github.com/cosmos/ethermint
+WORKDIR /go/src/github.com/aragon/aragon-chain
 
 # Install dependencies
 RUN apk add --update $PACKAGES
@@ -23,7 +23,7 @@ RUN apk add --update ca-certificates
 WORKDIR /root
 
 # Copy over binaries from the build-env
-COPY --from=build-env /go/src/github.com/cosmos/ethermint/build/emintd /usr/bin/emintd
+COPY --from=build-env /go/src/github.com/aragon/aragon-chain/build/arad /usr/bin/arad
 
-# Run emintd by default
-CMD ["emintd"]
+# Run arad by default
+CMD ["arad"]

@@ -48,44 +48,44 @@ $ make build
 First, create a key to use in signing the genesis transaction:
 
 ```bash
-emintcli keys add mykey
+aracli keys add mykey
 ```
 > replace mykey with whatever you want to name the key
 
 Then, run these commands to start up a node
 ```bash
 # Set moniker and chain-id for Ethermint (Moniker can be anything, chain-id must be an integer)
-emintd init mymoniker --chain-id 8
+arad init mymoniker --chain-id 8
 
 # Set up config for CLI
-emintcli config chain-id 8
-emintcli config output json
-emintcli config indent true
-emintcli config trust-node true
+aracli config chain-id 8
+aracli config output json
+aracli config indent true
+aracli config trust-node true
 
 # Allocate genesis accounts (cosmos formatted addresses)
-emintd add-genesis-account $(emintcli keys show mykey -a) 1000000000000000000photon,1000000000000000000stake
+arad add-genesis-account $(aracli keys show mykey -a) 1000000000000000000photon,1000000000000000000stake
 
 # Sign genesis transaction
-emintd gentx --name mykey
+arad gentx --name mykey
 
 # Collect genesis tx
-emintd collect-gentxs
+arad collect-gentxs
 
 # Run this to ensure everything worked and that the genesis file is setup correctly
-emintd validate-genesis
+arad validate-genesis
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-emintd start --pruning=nothing
+arad start --pruning=nothing
 ```
-> Note: If you used `make build` instead of make install, and replace all `emintcli` and `emintd` references to `./build/emintcli` and `./build/emintd` respectively
+> Note: If you used `make build` instead of make install, and replace all `aracli` and `arad` references to `./build/aracli` and `./build/arad` respectively
 
 ### Starting Ethermint Web3 RPC API
 
 After the daemon is started, run (in another process):
 
 ```bash
-emintcli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey
+aracli rest-server --laddr "tcp://localhost:8545" --unlock-key mykey
 ```
 
 and to make sure the server has started correctly, try querying the current block number:
@@ -98,7 +98,7 @@ or point any dev tooling at `http://localhost:8545` or whatever port is chosen j
 
 #### Clearing data from chain
 
-Data for the CLI and Daemon should be stored at `~/.emintd` and `~/.emintcli` by default, to start the node with a fresh state, run:
+Data for the CLI and Daemon should be stored at `~/.arad` and `~/.aracli` by default, to start the node with a fresh state, run:
 
 ```bash
 rm -rf ~/.emint*
@@ -111,7 +111,7 @@ To clear all data except key storage (if keyring backend chosen) and then you ca
 Ethermint supports using a file or OS keyring backend for key storage. To create and use a file stored key instead of defaulting to the OS keyring, add the flag `--keyring-backend file` to any relevant command and the password prompt will occur through the command line. This can also be saved as a CLI config option with:
 
 ```bash
-emintcli config keyring-backend file
+aracli config keyring-backend file
 ```
 
 ### Exporting Ethereum private key from Ethermint
@@ -119,13 +119,13 @@ emintcli config keyring-backend file
 To export the private key from Ethermint to something like Metamask, run:
 
 ```bash
-emintcli keys export-eth-key mykey
+aracli keys export-eth-key mykey
 ```
 
 Import account through private key, and to verify that the Ethereum address is correct with:
 
 ```bash
-emintcli keys parse $(emintcli keys show mykey -a)
+aracli keys parse $(aracli keys show mykey -a)
 ```
 
 ### Tests

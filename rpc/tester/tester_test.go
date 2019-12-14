@@ -1,6 +1,6 @@
 // This is a test utility for Ethermint's Web3 JSON-RPC services.
 //
-// To run these tests please first ensure you have the emintd running
+// To run these tests please first ensure you have the arad running
 // and have started the RPC service with `emintcl rest-server`.
 //
 // You can configure the desired port (or host) below.

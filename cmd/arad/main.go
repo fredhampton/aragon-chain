@@ -57,8 +57,8 @@ func main() {
 	ctx := server.NewDefaultContext()
 
 	rootCmd := &cobra.Command{
-		Use:               "emintd",
-		Short:             "Ethermint App Daemon (server)",
+		Use:               "arad",
+		Short:             "Aragon Chain App Daemon (server)",
 		PersistentPreRunE: server.PersistentPreRunEFn(ctx),
 	}
 	// CLI commands to initialize the chain
